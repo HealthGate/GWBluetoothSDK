@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C4C25BA32BC445D6007F63F7 /* GWBluetoothSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C25B982BC445D6007F63F7 /* GWBluetoothSDK.framework */; };
+		C4C25BA82BC445D6007F63F7 /* GWBluetoothSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BA72BC445D6007F63F7 /* GWBluetoothSDKTests.swift */; };
+		C4C25BA92BC445D6007F63F7 /* GWBluetoothSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C4C25B9B2BC445D6007F63F7 /* GWBluetoothSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C4C25BC42BC447C3007F63F7 /* GWBluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BB32BC447C3007F63F7 /* GWBluetooth.swift */; };
+		C4C25BC52BC447C4007F63F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BB52BC447C3007F63F7 /* Utils.swift */; };
+		C4C25BC62BC447C4007F63F7 /* GWReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BB72BC447C3007F63F7 /* GWReportManager.swift */; };
+		C4C25BC72BC447C4007F63F7 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BB82BC447C3007F63F7 /* BluetoothManager.swift */; };
+		C4C25BC82BC447C4007F63F7 /* DeviceSyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BB92BC447C3007F63F7 /* DeviceSyncBridge.swift */; };
+		C4C25BC92BC447C4007F63F7 /* DataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BBA2BC447C3007F63F7 /* DataStream.swift */; };
+		C4C25BCA2BC447C4007F63F7 /* FirmwareUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BBB2BC447C3007F63F7 /* FirmwareUpdater.swift */; };
+		C4C25BCB2BC447C4007F63F7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BBD2BC447C3007F63F7 /* Service.swift */; };
+		C4C25BCC2BC447C4007F63F7 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BBE2BC447C3007F63F7 /* ServiceProtocol.swift */; };
+		C4C25BCD2BC447C4007F63F7 /* GWServiceCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BC02BC447C3007F63F7 /* GWServiceCharacteristic.swift */; };
+		C4C25BCE2BC447C4007F63F7 /* GWStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BC12BC447C3007F63F7 /* GWStatus.swift */; };
+		C4C25BCF2BC447C4007F63F7 /* GWBtEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BC22BC447C3007F63F7 /* GWBtEvent.swift */; };
+		C4C25BD02BC447C4007F63F7 /* GWError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BC32BC447C3007F63F7 /* GWError.swift */; };
+		C4C25BD72BC463A0007F63F7 /* GWEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BD62BC463A0007F63F7 /* GWEnv.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C4C25BA42BC445D6007F63F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4C25B8F2BC445D6007F63F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4C25B972BC445D6007F63F7;
+			remoteInfo = GWBluetoothSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C4C25B982BC445D6007F63F7 /* GWBluetoothSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GWBluetoothSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4C25B9B2BC445D6007F63F7 /* GWBluetoothSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWBluetoothSDK.h; sourceTree = "<group>"; };
+		C4C25B9C2BC445D6007F63F7 /* GWBluetoothSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GWBluetoothSDK.docc; sourceTree = "<group>"; };
+		C4C25BA22BC445D6007F63F7 /* GWBluetoothSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GWBluetoothSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4C25BA72BC445D6007F63F7 /* GWBluetoothSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GWBluetoothSDKTests.swift; sourceTree = "<group>"; };
+		C4C25BB32BC447C3007F63F7 /* GWBluetooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GWBluetooth.swift; sourceTree = "<group>"; };
+		C4C25BB52BC447C3007F63F7 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C4C25BB72BC447C3007F63F7 /* GWReportManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GWReportManager.swift; sourceTree = "<group>"; };
+		C4C25BB82BC447C3007F63F7 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		C4C25BB92BC447C3007F63F7 /* DeviceSyncBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSyncBridge.swift; sourceTree = "<group>"; };
+		C4C25BBA2BC447C3007F63F7 /* DataStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStream.swift; sourceTree = "<group>"; };
+		C4C25BBB2BC447C3007F63F7 /* FirmwareUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirmwareUpdater.swift; sourceTree = "<group>"; };
+		C4C25BBD2BC447C3007F63F7 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		C4C25BBE2BC447C3007F63F7 /* ServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
+		C4C25BC02BC447C3007F63F7 /* GWServiceCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GWServiceCharacteristic.swift; sourceTree = "<group>"; };
+		C4C25BC12BC447C3007F63F7 /* GWStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GWStatus.swift; sourceTree = "<group>"; };
+		C4C25BC22BC447C3007F63F7 /* GWBtEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GWBtEvent.swift; sourceTree = "<group>"; };
+		C4C25BC32BC447C3007F63F7 /* GWError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GWError.swift; sourceTree = "<group>"; };
+		C4C25BD12BC44DD5007F63F7 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		C4C25BD62BC463A0007F63F7 /* GWEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GWEnv.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C4C25B952BC445D6007F63F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4C25B9F2BC445D6007F63F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4C25BA32BC445D6007F63F7 /* GWBluetoothSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C4C25B8E2BC445D6007F63F7 = {
+			isa = PBXGroup;
+			children = (
+				C4C25BD32BC44EF8007F63F7 /* Sources */,
+				C4C25BD12BC44DD5007F63F7 /* Package.swift */,
+				C4C25BA62BC445D6007F63F7 /* GWBluetoothSDKTests */,
+				C4C25B992BC445D6007F63F7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C4C25B992BC445D6007F63F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25B982BC445D6007F63F7 /* GWBluetoothSDK.framework */,
+				C4C25BA22BC445D6007F63F7 /* GWBluetoothSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C4C25B9A2BC445D6007F63F7 /* GWBluetoothSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25BBF2BC447C3007F63F7 /* Data */,
+				C4C25BB32BC447C3007F63F7 /* GWBluetooth.swift */,
+				C4C25BB22BC447C3007F63F7 /* Mappers */,
+				C4C25BB62BC447C3007F63F7 /* Models */,
+				C4C25BBC2BC447C3007F63F7 /* Service */,
+				C4C25BB42BC447C3007F63F7 /* Utils */,
+				C4C25B9B2BC445D6007F63F7 /* GWBluetoothSDK.h */,
+				C4C25B9C2BC445D6007F63F7 /* GWBluetoothSDK.docc */,
+			);
+			path = GWBluetoothSDK;
+			sourceTree = "<group>";
+		};
+		C4C25BA62BC445D6007F63F7 /* GWBluetoothSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25BA72BC445D6007F63F7 /* GWBluetoothSDKTests.swift */,
+			);
+			path = GWBluetoothSDKTests;
+			sourceTree = "<group>";
+		};
+		C4C25BB22BC447C3007F63F7 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		C4C25BB42BC447C3007F63F7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25BB52BC447C3007F63F7 /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C4C25BB62BC447C3007F63F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25BB72BC447C3007F63F7 /* GWReportManager.swift */,
+				C4C25BB82BC447C3007F63F7 /* BluetoothManager.swift */,
+				C4C25BB92BC447C3007F63F7 /* DeviceSyncBridge.swift */,
+				C4C25BBA2BC447C3007F63F7 /* DataStream.swift */,
+				C4C25BBB2BC447C3007F63F7 /* FirmwareUpdater.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4C25BBC2BC447C3007F63F7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25BBD2BC447C3007F63F7 /* Service.swift */,
+				C4C25BBE2BC447C3007F63F7 /* ServiceProtocol.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		C4C25BBF2BC447C3007F63F7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25BC02BC447C3007F63F7 /* GWServiceCharacteristic.swift */,
+				C4C25BC12BC447C3007F63F7 /* GWStatus.swift */,
+				C4C25BC22BC447C3007F63F7 /* GWBtEvent.swift */,
+				C4C25BC32BC447C3007F63F7 /* GWError.swift */,
+				C4C25BD62BC463A0007F63F7 /* GWEnv.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C4C25BD32BC44EF8007F63F7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C4C25B9A2BC445D6007F63F7 /* GWBluetoothSDK */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C4C25B932BC445D6007F63F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4C25BA92BC445D6007F63F7 /* GWBluetoothSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C4C25B972BC445D6007F63F7 /* GWBluetoothSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4C25BAC2BC445D6007F63F7 /* Build configuration list for PBXNativeTarget "GWBluetoothSDK" */;
+			buildPhases = (
+				C4C25B932BC445D6007F63F7 /* Headers */,
+				C4C25B942BC445D6007F63F7 /* Sources */,
+				C4C25B952BC445D6007F63F7 /* Frameworks */,
+				C4C25B962BC445D6007F63F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GWBluetoothSDK;
+			productName = GWBluetoothSDK;
+			productReference = C4C25B982BC445D6007F63F7 /* GWBluetoothSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C4C25BA12BC445D6007F63F7 /* GWBluetoothSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4C25BAF2BC445D6007F63F7 /* Build configuration list for PBXNativeTarget "GWBluetoothSDKTests" */;
+			buildPhases = (
+				C4C25B9E2BC445D6007F63F7 /* Sources */,
+				C4C25B9F2BC445D6007F63F7 /* Frameworks */,
+				C4C25BA02BC445D6007F63F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C4C25BA52BC445D6007F63F7 /* PBXTargetDependency */,
+			);
+			name = GWBluetoothSDKTests;
+			productName = GWBluetoothSDKTests;
+			productReference = C4C25BA22BC445D6007F63F7 /* GWBluetoothSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C4C25B8F2BC445D6007F63F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					C4C25B972BC445D6007F63F7 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					C4C25BA12BC445D6007F63F7 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+				};
+			};
+			buildConfigurationList = C4C25B922BC445D6007F63F7 /* Build configuration list for PBXProject "GWBluetoothSDK" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C4C25B8E2BC445D6007F63F7;
+			productRefGroup = C4C25B992BC445D6007F63F7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C4C25B972BC445D6007F63F7 /* GWBluetoothSDK */,
+				C4C25BA12BC445D6007F63F7 /* GWBluetoothSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C4C25B962BC445D6007F63F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4C25BA02BC445D6007F63F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C4C25B942BC445D6007F63F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4C25BD02BC447C4007F63F7 /* GWError.swift in Sources */,
+				C4C25BC42BC447C3007F63F7 /* GWBluetooth.swift in Sources */,
+				C4C25BC92BC447C4007F63F7 /* DataStream.swift in Sources */,
+				C4C25BCA2BC447C4007F63F7 /* FirmwareUpdater.swift in Sources */,
+				C4C25BC62BC447C4007F63F7 /* GWReportManager.swift in Sources */,
+				C4C25BCD2BC447C4007F63F7 /* GWServiceCharacteristic.swift in Sources */,
+				C4C25BCF2BC447C4007F63F7 /* GWBtEvent.swift in Sources */,
+				C4C25BCB2BC447C4007F63F7 /* Service.swift in Sources */,
+				C4C25BCE2BC447C4007F63F7 /* GWStatus.swift in Sources */,
+				C4C25BC52BC447C4007F63F7 /* Utils.swift in Sources */,
+				C4C25BC72BC447C4007F63F7 /* BluetoothManager.swift in Sources */,
+				C4C25BD72BC463A0007F63F7 /* GWEnv.swift in Sources */,
+				C4C25BC82BC447C4007F63F7 /* DeviceSyncBridge.swift in Sources */,
+				C4C25BCC2BC447C4007F63F7 /* ServiceProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4C25B9E2BC445D6007F63F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4C25BA82BC445D6007F63F7 /* GWBluetoothSDKTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C4C25BA52BC445D6007F63F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4C25B972BC445D6007F63F7 /* GWBluetoothSDK */;
+			targetProxy = C4C25BA42BC445D6007F63F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C4C25BAA2BC445D6007F63F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C4C25BAB2BC445D6007F63F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C4C25BAD2BC445D6007F63F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 97M2QV2N7N;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GWBluetoothSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C4C25BAE2BC445D6007F63F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 97M2QV2N7N;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GWBluetoothSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C4C25BB02BC445D6007F63F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 97M2QV2N7N;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GWBluetoothSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C4C25BB12BC445D6007F63F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 97M2QV2N7N;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GWBluetoothSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C4C25B922BC445D6007F63F7 /* Build configuration list for PBXProject "GWBluetoothSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4C25BAA2BC445D6007F63F7 /* Debug */,
+				C4C25BAB2BC445D6007F63F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4C25BAC2BC445D6007F63F7 /* Build configuration list for PBXNativeTarget "GWBluetoothSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4C25BAD2BC445D6007F63F7 /* Debug */,
+				C4C25BAE2BC445D6007F63F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4C25BAF2BC445D6007F63F7 /* Build configuration list for PBXNativeTarget "GWBluetoothSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4C25BB02BC445D6007F63F7 /* Debug */,
+				C4C25BB12BC445D6007F63F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C4C25B8F2BC445D6007F63F7 /* Project object */;
+}
