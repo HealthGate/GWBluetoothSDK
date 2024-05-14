@@ -36,7 +36,7 @@ enum GWBtEvent {
     case scanStopped
     case tryingToConnect
     case deviceConnected(String?)
-    case deviceDisconnected(String?)
+    case deviceDisconnected
     case discoveringServices
     case serviceDiscovered
     case discoveringCharacteristics(service: String)
@@ -48,7 +48,7 @@ enum GWBtEvent {
     case reportSent
     case gwError(GWError)
     case baseUrlUpdated(String)
-    case writtenValue(Int, String)
+    case writtenValue(String)
     case receivedSerial(String, String)
     case writtenFw(Int, String)
 
@@ -65,7 +65,7 @@ enum GWBtEvent {
         case .scanStopped: return .warn
         case .tryingToConnect: return .info
         case .deviceConnected(_): return .info
-        case .deviceDisconnected(_): return .info
+        case .deviceDisconnected: return .info
         case .discoveringServices: return .info
         case .serviceDiscovered: return .info
         case .discoveringCharacteristics: return .info
@@ -77,7 +77,7 @@ enum GWBtEvent {
         case .reportSent: return .info
         case .gwError(_): return .error
         case .baseUrlUpdated(_): return .info
-        case .writtenValue(_, _): return .info
+        case .writtenValue(_): return .info
         case .receivedSerial(_, _): return .info
         case .writtenFw(_, _): return .info
         }
@@ -91,8 +91,6 @@ enum GWBtEvent {
             return "newCBState: \(cbState.description)"
         case let .deviceConnected(deviceName):
             return "deviceConnected: \(deviceName ?? "Unknown")"
-        case let .deviceDisconnected(deviceName):
-            return "deviceConnected: \(deviceName ?? "Unknown")"
         case let .discoveringCharacteristics(service: service):
             return "discoveringCharacteristics for service: \(service)"
         case let .newValue(characteristic):
@@ -103,8 +101,8 @@ enum GWBtEvent {
             return gwError.description
         case let .baseUrlUpdated(newUrl):
             return "new baseUrl: \(newUrl)"
-        case let .writtenValue(length, device):
-            return "written \(length) bytes on \(device)"
+        case let .writtenValue(device):
+            return "written value on \(device)"
         case let .receivedSerial(serial, peripheral):
             return "peripheral \(peripheral) informed serial \(serial)"
         case let .writtenFw(length, device):

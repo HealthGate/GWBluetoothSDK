@@ -20,6 +20,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     private let fwUpdater = FirmwareUpdater()
     private var ackCharacteristic: CBCharacteristic?
     private var searchDeviceTask: Task<Void, Never>?
+    private var debugMode = false
 
     // MARK: - Init
 
@@ -48,7 +49,11 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                     startScanning()
                 }
                 do {
-                    try await Task.sleep(for: .seconds(60))
+                    if #available(iOS 16.0, *) {
+                        try await Task.sleep(for: .seconds(60))
+                    } else {
+                        try await Task.sleep(nanoseconds: 60*1000000000)
+                    }
                 } catch {
                     // When Task is cancelled, break loop
                     return
@@ -90,6 +95,10 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         reportManager.reportEvent(.gwBtStopped)
     }
 
+    func setDebug(_ value: Bool) {
+        debugMode = value
+    }
+
     // MARK: - CB Central Manager
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -124,8 +133,10 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        reportManager.reportEvent(.deviceDisconnected(peripheral.name))
-        statusStream.emit(.disconnectedAndScanning)
+        if !gwBtStopped {
+            reportManager.reportEvent(.deviceDisconnected)
+            statusStream.emit(.disconnectedAndScanning)
+        }
         isConnected = false
         connectedPeripheral = nil
     }
@@ -188,7 +199,9 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         reportManager.reportEvent(.newValue(gwCharacteristic))
 
-        print("Received the following data for chr \(String(describing: gwCharacteristic)): \(data.base64EncodedString())")
+        if debugMode {
+            print("Received the following data for chr \(String(describing: gwCharacteristic)): \(data.base64EncodedString())")
+        }
 
         switch gwCharacteristic {
         case .statusAck, .dataParsed, .dataRaw, .logPrint, .logPacket:
@@ -209,8 +222,11 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     }
 
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        if error == nil {
-            fwUpdater.signalAck(for: characteristic)
+        if let error {
+            GWReportManager.shared.reportEvent(.gwError(.failedToWrite(error.localizedDescription)))
+        } else {
+            GWReportManager.shared.reportEvent(.writtenValue(connectedPeripheral?.identifier.uuidString ?? "Unknown")
+            )
         }
     }
 

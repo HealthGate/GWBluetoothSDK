@@ -27,7 +27,11 @@ final class DeviceSyncBridge {
         Task {
             sendMsgsTask = Task {
                 while true {
-                    try? await Task.sleep(for: .seconds(sendMsgsTimeInSeconds))
+                    if #available(iOS 16.0, *) {
+                        try? await Task.sleep(for: .seconds(sendMsgsTimeInSeconds))
+                    } else {
+                        try? await Task.sleep(nanoseconds: UInt64(sendMsgsTimeInSeconds*1000000000))
+                    }
                     await sendAllMsgs()
                 }
             }

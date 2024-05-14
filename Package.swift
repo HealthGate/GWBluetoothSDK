@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "GWBluetoothSDK",
     platforms: [
-        .iOS(.v16),
+        .iOS(.v15),
     ],
     products: [
         .library(name: "GWBluetoothSDK", targets: ["GWBluetoothSDK"]),

@@ -15,6 +15,7 @@ public class GWBluetooth {
             print("Debug mode: \(debugMode)")
             GWReportManager.shared.setDebug(debugMode)
             Service.shared.setDebug(debugMode)
+            btManager.setDebug(debugMode)
         }
     }
 
