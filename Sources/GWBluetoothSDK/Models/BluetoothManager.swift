@@ -242,7 +242,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             GWReportManager.shared.reportEvent(.gwError(.failure("Does not contain ackCharacteristic stored to send ACK")))
             return
         }
-        GWReportManager.shared.reportEvent(.writtenValue(data.count, connectedPeripheral?.identifier.uuidString ?? "Unknown"))
+        GWReportManager.shared.reportEvent(.writtenValue(connectedPeripheral?.identifier.uuidString ?? "Unknown"))
         connectedPeripheral?.writeValue(data, for: ackCharacteristic, type: .withResponse)
     }
 
