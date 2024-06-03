@@ -312,9 +312,35 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         return urlString
     }
 
+    func convertDataToUIntString(_ data: Data) -> String? {
+        // Serial has 6 bytes
+        guard data.count == 6 else {
+            return nil
+        }
+
+        // Complete the data with 2 bytes of padding
+        var paddedData = Data([0, 0]) + data
+
+        // Reverse the bytes to match little-endian format
+        paddedData.reverse()
+
+        // Ensure the data is correctly aligned
+        guard paddedData.count == MemoryLayout<UInt64>.size else {
+            return nil
+        }
+
+        // Load as UInt64
+        let value = paddedData.withUnsafeBytes {
+            $0.load(as: UInt64.self)
+        }
+
+        // Convert the UInt64 value to a string
+        return String(value)
+    }
+
     private func hasValidSerial(_ data: Data) -> Bool {
         guard
-            let serial = String(bytes: data, encoding: .utf8),
+            let serial = convertDataToUIntString(data),
             serial.allSatisfy({ $0.isNumber }),
             serial.count <= 16
         else {
