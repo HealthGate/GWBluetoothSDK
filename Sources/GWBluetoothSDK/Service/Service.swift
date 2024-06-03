@@ -178,6 +178,7 @@ final class Service: ServiceProtocol {
             else {
                 throw GWError.invalidAppKey
             }
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue(GWReportManager.shared.clientSerial, forHTTPHeaderField: "serial")
             request.addValue(GWReportManager.shared.btId, forHTTPHeaderField: "btid")
             request.addValue(appKey, forHTTPHeaderField: "X-API-Key")
