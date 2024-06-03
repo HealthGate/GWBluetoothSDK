@@ -52,9 +52,14 @@ final class DeviceSyncBridge {
             return
         }
 
-        let response = try? await service.sendDeviceMsgs(joinedMsg)
-        guard let response else { return }
-        onAckReceived?(response)
+        do {
+            let response = try await service.sendDeviceMsgs(joinedMsg)
+            onAckReceived?(response)
+        } catch {
+            GWReportManager.shared.reportEvent(
+                .gwError(.failedToSendMsgsToAPI(error.localizedDescription))
+            )
+        }
     }
 
     func joinDataArray(_ dataArray: [Data], withSeparator separator: String) -> Data? {

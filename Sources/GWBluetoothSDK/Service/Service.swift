@@ -66,7 +66,9 @@ final class Service: ServiceProtocol {
 
     func getFW(url: String) async throws -> Data {
         do {
-            let request = try createRequest(url: url, method: "GET")
+            var request = try createRequest(url: url, method: "GET")
+            request.addValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
+            request.addValue("gzip, deflate, br", forHTTPHeaderField: "Accept-Encoding")
             let (data, response) = try await makeRequest(request)
             if response.isSuccess {
                 return data

@@ -27,7 +27,7 @@ class GWReportManager {
                 if #available(iOS 16.0, *) {
                     try? await Task.sleep(for: .seconds(sendReportTimeInSeconds))
                 } else {
-                    try? await Task.sleep(nanoseconds: UInt64(sendReportTimeInSeconds*1000000000))
+                    try? await Task.sleep(nanoseconds: UInt64(sendReportTimeInSeconds * 1000000000))
                 }
                 guard GWBluetooth.shared.env != nil else { continue }
                 await sendReports()

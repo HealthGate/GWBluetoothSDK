@@ -50,36 +50,40 @@ enum GWBtEvent {
     case baseUrlUpdated(String)
     case writtenValue(String)
     case receivedSerial(String, String)
-    case writtenFw(Int, String)
+    case writtenFw(Int, Int, String)
+    case emptyChr(String)
+    case finishedFwUpdate(Int)
 
     var level: LogLevel {
         switch self {
         case .initialized: return .info
         case .willStartScanning: return .info
         case .notPoweredOn: return .info
-        case .newStatus(let gwStatus): return gwStatus.level
-        case .newCBState(_): return .info
+        case let .newStatus(gwStatus): return gwStatus.level
+        case .newCBState: return .info
         case .startingScan: return .info
         case .discoveredPeripheral: return .info
         case .hgDeviceFound: return .info
         case .scanStopped: return .warn
         case .tryingToConnect: return .info
-        case .deviceConnected(_): return .info
+        case .deviceConnected: return .info
         case .deviceDisconnected: return .info
         case .discoveringServices: return .info
         case .serviceDiscovered: return .info
         case .discoveringCharacteristics: return .info
         case .characteristicsDiscovered: return .info
-        case .newValue(_): return .info
-        case .characteristicNotified(_): return .info
+        case .newValue: return .info
+        case .characteristicNotified: return .info
         case .gwBtStopped: return .warn
         case .sendingReport: return .info
         case .reportSent: return .info
-        case .gwError(_): return .error
-        case .baseUrlUpdated(_): return .info
-        case .writtenValue(_): return .info
-        case .receivedSerial(_, _): return .info
-        case .writtenFw(_, _): return .info
+        case .gwError: return .error
+        case .baseUrlUpdated: return .info
+        case .writtenValue: return .info
+        case .receivedSerial: return .info
+        case .writtenFw: return .info
+        case .emptyChr: return .warn
+        case .finishedFwUpdate: return .info
         }
     }
 
@@ -105,8 +109,12 @@ enum GWBtEvent {
             return "written value on \(device)"
         case let .receivedSerial(serial, peripheral):
             return "peripheral \(peripheral) informed serial \(serial)"
-        case let .writtenFw(length, device):
-            return "written FW with \(length) bytes on \(device)"
+        case let .writtenFw(index, length, device):
+            return "writing FW chunk #\(index) with \(length) bytes on \(device)"
+        case let .emptyChr(chr):
+            return "characteristic is empty: \(chr)"
+        case let .finishedFwUpdate(chunks):
+            return "finished FW update with \(chunks) chunks"
         default: return String(describing: self)
         }
     }

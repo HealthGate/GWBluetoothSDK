@@ -19,6 +19,8 @@ public enum GWError: Error {
     case failedToSendMsgsToAPI(String)
     case failedToWrite(String)
     case failure(String)
+    case fwAckTimeout
+    case fwUpdateCanceled
 
     var description: String {
         switch self {

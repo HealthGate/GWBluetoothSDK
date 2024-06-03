@@ -21,6 +21,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     private var ackCharacteristic: CBCharacteristic?
     private var searchDeviceTask: Task<Void, Never>?
     private var debugMode = false
+    private var ongoingMessage: [GWServiceCharacteristic: Data] = [:]
 
     // MARK: - Init
 
@@ -52,7 +53,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                     if #available(iOS 16.0, *) {
                         try await Task.sleep(for: .seconds(60))
                     } else {
-                        try await Task.sleep(nanoseconds: 60*1000000000)
+                        try await Task.sleep(nanoseconds: 60 * 1000000000)
                     }
                 } catch {
                     // When Task is cancelled, break loop
@@ -139,6 +140,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         isConnected = false
         connectedPeripheral = nil
+        fwUpdater.cancelUpdate()
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -180,12 +182,8 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let error = error {
-            // Disconsider random characteristics with read not allowed
-            if error.localizedDescription.contains("not permitted") {
-                return
-            }
-            statusStream.emit(.failure("Error updating value for characteristic \(characteristic.uuid.uuidString): \(error.localizedDescription)"))
+        if let error {
+            handleReadError(error, for: characteristic)
             return
         }
 
@@ -199,34 +197,55 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         reportManager.reportEvent(.newValue(gwCharacteristic))
 
-        if debugMode {
-            print("Received the following data for chr \(String(describing: gwCharacteristic)): \(data.base64EncodedString())")
-        }
+        log("Received the following data for chr \(String(describing: gwCharacteristic)): \(data.base64EncodedString())")
 
-        switch gwCharacteristic {
-        case .statusAck, .dataParsed, .dataRaw, .logPrint, .logPacket:
-            Task {
-                await deviceBridge.handleMsg(data)
-            }
-        case .serialFw:
+        if gwCharacteristic == .serialFw {
             if !hasValidSerial(data) {
                 guard let urlString = getValidURL(data) else {
                     statusStream.emit(.failure("Invalid URL for new FW"))
                     return
                 }
-                fwUpdater.startUpdate(peripheral, to: urlString, using: characteristic)
+                if !fwUpdater.hasUpdateInProgress() {
+                    fwUpdater.startUpdate(peripheral, to: urlString, using: characteristic)
+                }
             }
-        case .dataParsedV2:
-            print("Received dataParsedV2")
+            return
+        } else if gwCharacteristic == .statusAck {
+            ongoingMessage[gwCharacteristic] = data
+            sendCompleteMessage(gwCharacteristic)
+            return
         }
+
+        if msgIsEOF(data) {
+            log("Finished read of \(String(describing: gwCharacteristic))")
+            sendCompleteMessage(gwCharacteristic)
+            return
+        }
+
+        if ongoingMessage[gwCharacteristic] != nil {
+            log("Received next chunk for \(String(describing: gwCharacteristic))")
+            ongoingMessage[gwCharacteristic]?.append(data)
+        } else {
+            log("Received first chunk for \(String(describing: gwCharacteristic)))")
+            ongoingMessage[gwCharacteristic] = data
+        }
+
+        peripheral.readValue(for: characteristic)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error {
             GWReportManager.shared.reportEvent(.gwError(.failedToWrite(error.localizedDescription)))
         } else {
-            GWReportManager.shared.reportEvent(.writtenValue(connectedPeripheral?.identifier.uuidString ?? "Unknown")
-            )
+            if
+                let gwCharacteristic = GWServiceCharacteristic(rawValue: characteristic.uuid.uuidString),
+                gwCharacteristic == .serialFw
+            {
+                fwUpdater.signalAck(for: characteristic)
+            } else {
+                GWReportManager.shared.reportEvent(.writtenValue(connectedPeripheral?.identifier.uuidString ?? "Unknown")
+                )
+            }
         }
     }
 
@@ -237,13 +256,49 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
     // MARK: - Private methods
 
+    private func msgIsEOF(_ data: Data) -> Bool {
+        data.count == 1 && data.first == 0x0
+    }
+
+    private func handleReadError(_ error: Error, for characteristic: CBCharacteristic) {
+        // Disconsider random characteristics with read not allowed
+        if error.localizedDescription.contains("not permitted") {
+            return
+        }
+        statusStream.emit(.failure("Error updating value for characteristic \(characteristic.uuid.uuidString): \(error.localizedDescription)"))
+        guard let gwChr = GWServiceCharacteristic(rawValue: characteristic.uuid.uuidString) else { return }
+        if ongoingMessage[gwChr] != nil {
+            ongoingMessage.removeValue(forKey: gwChr)
+        }
+    }
+
+    private func sendCompleteMessage(_ characteristic: GWServiceCharacteristic) {
+        guard let data = ongoingMessage[characteristic] else {
+            GWReportManager.shared.reportEvent(.emptyChr(characteristic.rawValue))
+            return
+        }
+
+        switch characteristic {
+        case .statusAck, .dataParsed, .dataRaw, .logPrint, .logPacket:
+            Task {
+                await deviceBridge.handleMsg(data)
+            }
+        case .dataParsedV2, .serialFw:
+            return
+        }
+        ongoingMessage[characteristic] = nil
+    }
+
     private func onAckReceived(_ data: Data) {
         guard let ackCharacteristic else {
             GWReportManager.shared.reportEvent(.gwError(.failure("Does not contain ackCharacteristic stored to send ACK")))
             return
         }
-        GWReportManager.shared.reportEvent(.writtenValue(connectedPeripheral?.identifier.uuidString ?? "Unknown"))
-        connectedPeripheral?.writeValue(data, for: ackCharacteristic, type: .withResponse)
+        guard let connectedPeripheral else {
+            GWReportManager.shared.reportEvent(.gwError(.failure("Tried to send ACK without connected peripheral")))
+            return
+        }
+        connectedPeripheral.writeValue(data, for: ackCharacteristic, type: .withResponse)
     }
 
     private func getValidURL(_ data: Data) -> String? {
@@ -267,5 +322,11 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         GWReportManager.shared.clientSerial = serial
         return true
+    }
+
+    private func log(_ message: String) {
+        if debugMode {
+            print(message)
+        }
     }
 }
