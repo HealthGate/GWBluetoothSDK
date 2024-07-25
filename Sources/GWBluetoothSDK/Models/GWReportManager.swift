@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GWReportManager {
     private let sendReportTimeInSeconds = 120
@@ -27,6 +28,7 @@ class GWReportManager {
     static let shared = GWReportManager()
     private init() {
         setupEventReports()
+        setupBackgroundListener()
     }
 
     func setupEventReports() {
@@ -68,6 +70,19 @@ class GWReportManager {
         } catch {
             reportEvent(.gwError(.failure(error.localizedDescription)))
         }
+    }
+
+    func setupBackgroundListener() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
+
+    @objc private func appDidEnterBackground() {
+        self.reportEvent(.enteredBackground)
     }
 }
 

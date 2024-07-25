@@ -54,6 +54,7 @@ enum GWBtEvent: Equatable {
     case emptyChr(String)
     case finishedFwUpdate(Int)
     case dataTimeout
+    case enteredBackground
 
     var level: LogLevel {
         switch self {
@@ -86,6 +87,7 @@ enum GWBtEvent: Equatable {
         case .emptyChr: return .warn
         case .finishedFwUpdate: return .info
         case .dataTimeout: return .error
+        case .enteredBackground: return .info
         }
     }
 
