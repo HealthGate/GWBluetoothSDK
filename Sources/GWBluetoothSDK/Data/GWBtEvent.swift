@@ -24,7 +24,7 @@ enum LogLevel {
     case info, warn, error
 }
 
-enum GWBtEvent {
+enum GWBtEvent: Equatable {
     case initialized
     case willStartScanning
     case notPoweredOn
@@ -117,6 +117,10 @@ enum GWBtEvent {
             return "finished FW update with \(chunks) chunks"
         default: return String(describing: self)
         }
+    }
+
+    static func == (lhs: GWBtEvent, rhs: GWBtEvent) -> Bool {
+        lhs.description == rhs.description
     }
 }
 
