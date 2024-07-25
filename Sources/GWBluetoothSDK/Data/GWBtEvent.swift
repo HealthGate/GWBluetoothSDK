@@ -53,6 +53,7 @@ enum GWBtEvent: Equatable {
     case writtenFw(Int, Int, String)
     case emptyChr(String)
     case finishedFwUpdate(Int)
+    case dataTimeout
 
     var level: LogLevel {
         switch self {
@@ -84,6 +85,7 @@ enum GWBtEvent: Equatable {
         case .writtenFw: return .info
         case .emptyChr: return .warn
         case .finishedFwUpdate: return .info
+        case .dataTimeout: return .error
         }
     }
 
