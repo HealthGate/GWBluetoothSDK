@@ -24,7 +24,7 @@ enum LogLevel {
     case info, warn, error
 }
 
-enum GWBtEvent {
+enum GWBtEvent: Equatable {
     case initialized
     case willStartScanning
     case notPoweredOn
@@ -53,6 +53,8 @@ enum GWBtEvent {
     case writtenFw(Int, Int, String)
     case emptyChr(String)
     case finishedFwUpdate(Int)
+    case dataTimeout
+    case enteredBackground
 
     var level: LogLevel {
         switch self {
@@ -84,6 +86,8 @@ enum GWBtEvent {
         case .writtenFw: return .info
         case .emptyChr: return .warn
         case .finishedFwUpdate: return .info
+        case .dataTimeout: return .error
+        case .enteredBackground: return .info
         }
     }
 
@@ -117,6 +121,10 @@ enum GWBtEvent {
             return "finished FW update with \(chunks) chunks"
         default: return String(describing: self)
         }
+    }
+
+    static func == (lhs: GWBtEvent, rhs: GWBtEvent) -> Bool {
+        lhs.description == rhs.description
     }
 }
 

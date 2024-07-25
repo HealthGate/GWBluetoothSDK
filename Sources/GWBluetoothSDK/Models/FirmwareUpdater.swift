@@ -51,7 +51,8 @@ final class FirmwareUpdater {
     }
 
     func cancelUpdate() {
-        currentTask?.cancel()
+        guard let currentTask else { return }
+        currentTask.cancel()
         GWReportManager.shared.reportEvent(.gwError(.fwUpdateCanceled))
     }
 

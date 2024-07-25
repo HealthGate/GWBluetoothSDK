@@ -11,6 +11,9 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
     // MARK: - Private properties
 
+    private lazy var bluetoothTimeout: BluetoothTimeout = .init(onTimeout: { [weak self] in
+        self?.onDataTimeout()
+    })
     private var centralManager: CBCentralManager?
     private var connectedPeripheral: CBPeripheral?
     private var gwBtStopped = false
@@ -131,6 +134,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         connectedPeripheral = peripheral
         reportManager.reportEvent(.discoveringServices)
         peripheral.discoverServices(nil)
+        bluetoothTimeout.start()
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -141,6 +145,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         isConnected = false
         connectedPeripheral = nil
         fwUpdater.cancelUpdate()
+        bluetoothTimeout.stop()
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -186,6 +191,8 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             handleReadError(error, for: characteristic)
             return
         }
+
+        bluetoothTimeout.resetTimeoutTimer()
 
         guard let gwCharacteristic = GWServiceCharacteristic(rawValue: characteristic.uuid.uuidString) else {
             statusStream.emit(.failure("Unknown characteristic: \(characteristic.uuid.uuidString)"))
@@ -348,6 +355,13 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         GWReportManager.shared.clientSerial = serial
         return true
+    }
+
+    private func onDataTimeout() {
+        reportManager.reportEvent(.dataTimeout)
+        if let connectedPeripheral {
+            centralManager?.cancelPeripheralConnection(connectedPeripheral)
+        }
     }
 
     private func log(_ message: String) {
