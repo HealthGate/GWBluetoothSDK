@@ -135,7 +135,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if !gwBtStopped {
-            reportManager.reportEvent(.deviceDisconnected)
+            reportManager.reportEvent(.deviceDisconnected(error?.localizedDescription))
             statusStream.emit(.disconnectedAndScanning)
         }
         isConnected = false

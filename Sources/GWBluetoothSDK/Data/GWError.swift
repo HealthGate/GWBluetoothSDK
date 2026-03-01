@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum GWError: Error {
+public enum GWError: Error, Hashable {
     case btNotAuthorized
     case deviceNotConnected
     case btUnavailable

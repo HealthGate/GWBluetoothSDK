@@ -36,7 +36,7 @@ enum GWBtEvent {
     case scanStopped
     case tryingToConnect
     case deviceConnected(String?)
-    case deviceDisconnected
+    case deviceDisconnected(String?)
     case discoveringServices
     case serviceDiscovered
     case discoveringCharacteristics(service: String)
@@ -115,6 +115,8 @@ enum GWBtEvent {
             return "characteristic is empty: \(chr)"
         case let .finishedFwUpdate(chunks):
             return "finished FW update with \(chunks) chunks"
+        case let .deviceDisconnected(errorMsg):
+            return "deviceDisconnected with error: \(errorMsg ?? "none")"
         default: return String(describing: self)
         }
     }
@@ -131,5 +133,11 @@ extension CBManagerState {
         case .poweredOn: return "poweredOn"
         @unknown default: return "unknown"
         }
+    }
+}
+
+extension GWBtEvent: Equatable, Hashable {
+    static func == (lhs: GWBtEvent, rhs: GWBtEvent) -> Bool {
+        lhs.description == rhs.description
     }
 }

@@ -143,7 +143,7 @@ final class Service: ServiceProtocol {
         }
 
         if let body = request.httpBody {
-            log("Request Body (Base64): \(body.base64EncodedString())")
+            log("Request Body (Base64): \(body.base64EncodedString().count) bytes")
         }
 
         log("Starting Request...")

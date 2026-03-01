@@ -8,7 +8,7 @@
 import CoreBluetooth
 import Foundation
 
-public enum GWStatus {
+public enum GWStatus: Hashable {
     case unauthorized,
          poweredOff,
          failure(String),

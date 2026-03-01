@@ -15,6 +15,11 @@ class GWReportManager {
     private var sendReportTask: Task<Void, Never>?
     var btId: String = "Unknown"
     var clientSerial: String = "Unknown"
+    
+    private let throtleDelay: TimeInterval = 60 * 60
+    private let eventsToThrotle: Set<GWBtEvent> = [.willStartScanning, .startingScan]
+    private var lastThrothled: [GWBtEvent: Date] = [:]
+    private let throttleLock = NSLock()
 
     static let shared = GWReportManager()
     private init() {
@@ -42,6 +47,17 @@ class GWReportManager {
     func reportEvent(_ event: GWBtEvent) {
         if debugMode {
             print(event.description)
+        }
+        if eventsToThrotle.contains(event) {
+            throttleLock.lock()
+            defer { throttleLock.unlock() }
+            if let lastThrottledDate = lastThrothled[event] {
+                guard lastThrottledDate.distance(to: .now) > throtleDelay else {
+                    print("Won't report \(event) because it was recently reported")
+                    return
+                }
+            }
+            lastThrothled[event] = .now
         }
         Task {
             await buffer.append(.init(from: event))
