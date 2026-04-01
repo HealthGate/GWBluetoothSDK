@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GWReportManager {
     private let sendReportTimeInSeconds = 120
@@ -21,9 +22,18 @@ class GWReportManager {
     private var lastThrothled: [GWBtEvent: Date] = [:]
     private let throttleLock = NSLock()
 
+    /// Events to send only once per report
+    let eventsToMerge: [GWBtEvent] = [
+        .willStartScanning,
+        .discoveredPeripheral,
+        .notPoweredOn,
+        .newStatus(.unauthorized),
+    ]
+
     static let shared = GWReportManager()
     private init() {
         setupEventReports()
+        setupBackgroundListener()
     }
 
     func setupEventReports() {
@@ -60,6 +70,10 @@ class GWReportManager {
             lastThrothled[event] = .now
         }
         Task {
+            if (eventsToMerge.contains(event)) {
+                let alreadyTracked = await buffer.contains(event)
+                if (alreadyTracked) { return }
+            }
             await buffer.append(.init(from: event))
         }
     }
@@ -72,6 +86,19 @@ class GWReportManager {
         } catch {
             reportEvent(.gwError(.failure(error.localizedDescription)))
         }
+    }
+
+    func setupBackgroundListener() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
+
+    @objc private func appDidEnterBackground() {
+        self.reportEvent(.enteredBackground)
     }
 }
 
@@ -86,5 +113,9 @@ actor ReportBuffer {
         let currentBuffer = buffer
         buffer.removeAll()
         return currentBuffer
+    }
+
+    func contains(_ event: GWBtEvent) -> Bool {
+        buffer.contains { $0.eventDescription == event.description }
     }
 }

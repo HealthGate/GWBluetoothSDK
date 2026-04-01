@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C49408202C5277E1009699CD /* BluetoothTimeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494081F2C5277E1009699CD /* BluetoothTimeout.swift */; };
 		C4C25BA32BC445D6007F63F7 /* GWBluetoothSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C25B982BC445D6007F63F7 /* GWBluetoothSDK.framework */; };
 		C4C25BA82BC445D6007F63F7 /* GWBluetoothSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C25BA72BC445D6007F63F7 /* GWBluetoothSDKTests.swift */; };
 		C4C25BA92BC445D6007F63F7 /* GWBluetoothSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C4C25B9B2BC445D6007F63F7 /* GWBluetoothSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C494081F2C5277E1009699CD /* BluetoothTimeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothTimeout.swift; sourceTree = "<group>"; };
 		C4C25B982BC445D6007F63F7 /* GWBluetoothSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GWBluetoothSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C25B9B2BC445D6007F63F7 /* GWBluetoothSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWBluetoothSDK.h; sourceTree = "<group>"; };
 		C4C25B9C2BC445D6007F63F7 /* GWBluetoothSDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GWBluetoothSDK.docc; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				C4C25BB72BC447C3007F63F7 /* GWReportManager.swift */,
 				C4C25BB82BC447C3007F63F7 /* BluetoothManager.swift */,
+				C494081F2C5277E1009699CD /* BluetoothTimeout.swift */,
 				C4C25BB92BC447C3007F63F7 /* DeviceSyncBridge.swift */,
 				C4C25BBA2BC447C3007F63F7 /* DataStream.swift */,
 				C4C25BBB2BC447C3007F63F7 /* FirmwareUpdater.swift */,
@@ -295,6 +298,7 @@
 				C4C25BCB2BC447C4007F63F7 /* Service.swift in Sources */,
 				C4C25BCE2BC447C4007F63F7 /* GWStatus.swift in Sources */,
 				C4C25BC52BC447C4007F63F7 /* Utils.swift in Sources */,
+				C49408202C5277E1009699CD /* BluetoothTimeout.swift in Sources */,
 				C4C25BC72BC447C4007F63F7 /* BluetoothManager.swift in Sources */,
 				C4C25BD72BC463A0007F63F7 /* GWEnv.swift in Sources */,
 				C4C25BC82BC447C4007F63F7 /* DeviceSyncBridge.swift in Sources */,
